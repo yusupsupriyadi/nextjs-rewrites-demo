@@ -1,7 +1,14 @@
-import type { NextConfig } from "next";
+import type { NextConfig } from 'next';
 
 const nextConfig: NextConfig = {
-  /* config options here */
+	async rewrites() {
+		return [
+			{
+				source: '/my-api/products', //custom made costume
+				destination: 'https://dummyjson.com/products/1',
+			},
+		];
+	},
 };
 
 export default nextConfig;
