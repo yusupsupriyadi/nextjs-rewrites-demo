@@ -50,8 +50,11 @@ export default function Home() {
 						endpoint URLs
 					</p>
 					<p className='text-xs lg:text-sm text-gray-500 dark:text-gray-400 mt-4 max-w-md lg:max-w-lg mx-auto'>
-						💡 Open DevTools (F12) and check Network tab to see the
-						URL rewrite in action!
+						💡{' '}
+						<span className='bg-blue-500/60 text-white px-2 py-1'>
+							Open DevTools (F12)
+						</span>{' '}
+						and check Network tab to see the URL rewrite in action!
 					</p>
 				</div>
 
@@ -83,7 +86,7 @@ export default function Home() {
 								Loading...
 							</span>
 						) : (
-							'Fetch Data'
+							"Let's Testing"
 						)}
 					</button>
 
