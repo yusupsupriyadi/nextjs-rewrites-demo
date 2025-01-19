@@ -1,36 +1,117 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Next.js Rewrites Demo
 
-## Getting Started
+A demonstration of Next.js rewrites feature to modify API endpoint URLs. This project shows how to use Next.js rewrites to create clean, user-friendly URLs while internally redirecting to different endpoints.
 
-First, run the development server:
+## 🔄 Understanding Next.js Rewrites
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+### What are Rewrites?
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Rewrites allow you to map an incoming request path to a different destination path. They are particularly useful when you want to:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+-   Proxy requests to external APIs
+-   Create clean, user-friendly URLs
+-   Hide implementation details from the client
+-   Maintain backward compatibility
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### How Rewrites Work in This Demo
 
-## Learn More
+1. **Client-side URL**: When you click "Let's Testing", the app makes a request to:
 
-To learn more about Next.js, take a look at the following resources:
+    ```
+    /my-api/products
+    ```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+2. **Server-side Rewrite**: Next.js internally redirects this request to:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+    ```
+    https://dummyjson.com/products/1
+    ```
 
-## Deploy on Vercel
+3. **Configuration**: This is configured in `next.config.js`:
+    ```javascript
+    module.exports = {
+    	async rewrites() {
+    		return [
+    			{
+    				source: '/my-api/products',
+    				destination: 'https://dummyjson.com/products/1',
+    			},
+    		];
+    	},
+    };
+    ```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### Benefits of Using Rewrites
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+1. **Security**: Hide external API endpoints from client-side code
+2. **Flexibility**: Change backend endpoints without updating frontend code
+3. **Clean URLs**: Present simple, meaningful URLs to users
+4. **API Aggregation**: Combine multiple APIs under a single domain
+
+## 🛠️ Technical Stack
+
+-   **Framework**: Next.js 14
+-   **Styling**: Tailwind CSS
+-   **State Management**: React Hooks
+-   **API Integration**: Fetch API with async/await
+-   **Font**: Geist Sans (Vercel's system font)
+
+## 🎯 Use Cases
+
+1. **API Proxy**:
+
+    - Hide third-party API endpoints
+    - Add authentication headers server-side
+    - Transform request/response data
+
+2. **URL Management**:
+
+    - Create shorter, cleaner URLs
+    - Maintain old URLs while updating backend
+    - Aggregate multiple services under one domain
+
+3. **Development & Testing**:
+    - Switch between development and production APIs
+    - A/B testing different backend services
+    - Mock API responses for testing
+
+## 📚 Further Reading
+
+-   [Next.js Rewrites Documentation](https://nextjs.org/docs/api-reference/next.config.js/rewrites)
+-   [API Routes in Next.js](https://nextjs.org/docs/api-routes/introduction)
+-   [Middleware in Next.js](https://nextjs.org/docs/middleware)
+
+## 🚀 Getting Started
+
+1. Clone the repository:
+
+    ```bash
+    git clone https://github.com/yusupsupriyadi/nextjs-rewrites-demo.git
+    cd nextjs-rewrites-demo
+    ```
+
+2. Install dependencies:
+
+    ```bash
+    npm install
+    # or
+    yarn install
+    ```
+
+3. Run the development server:
+
+    ```bash
+    npm run dev
+    # or
+    yarn dev
+    ```
+
+4. Open [http://localhost:3000](http://localhost:3000) in your browser
+
+## 🤝 Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+## 📝 License
+
+This project is open source and available under the [MIT License](LICENSE).
